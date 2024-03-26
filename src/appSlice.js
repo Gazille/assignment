@@ -41,15 +41,20 @@ export const login = createAsyncThunk(
 
 export const signup = createAsyncThunk(
   "apps/signup",
-  async (payload, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, dispatch }) => {
     const res = await axios.post(
       `${process.env.REACT_APP_API_URL}/auth/signup`,
       payload
     );
-    if (res.status !== 200) {
+    if (res.status !== 201) {
       return rejectWithValue(res.data);
     }
-    return res.data;
+    dispatch(
+      login({
+        email: payload.email,
+        password: payload.password,
+      })
+    );
   }
 );
 
@@ -67,7 +72,7 @@ export const logout = createAsyncThunk(
         },
       }
     );
-    if (res.status !== 200) {
+    if (res.status !== 204) {
       return rejectWithValue(res.data);
     }
     return res.data;
