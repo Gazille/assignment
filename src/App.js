@@ -4,6 +4,7 @@ import Signup from "./modules/Signup";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "./modules/Dashboard";
 import { Redirect } from "react-router";
+import { PrivateRoute } from "./components";
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path="/dashboard" component={Dashboard}></Route>
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
           <Redirect to="/login" />
         </Switch>
       </div>

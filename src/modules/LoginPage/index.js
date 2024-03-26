@@ -1,15 +1,82 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  FormFeedback,
+} from "reactstrap";
 import { ReactComponent as SocialButtons } from "../../assets/social-buttons.svg";
 import MeetingImage from "../../assets/meeting.svg";
 import "./styles.css";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../appSlice";
+import { useState } from "react";
+import { regEmail } from "../../constants";
+import { isEmpty } from "lodash";
 
 const LoginPage = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const [validates, setValidates] = useState(() => ({
+    email: "",
+    password: "",
+  }));
 
-  const handleSubmitForm = (e) => {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
+    history.push("/dashboard");
+  }
+
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
+    const result = await Promise.all([
+      handleValidateEmail(e.target.elements.email.value),
+      handleValidatePassword(e.target.elements.password.value),
+    ]);
+    if (result.every((value) => value)) {
+      dispatch(
+        login({
+          email: e.target.elements.email.value,
+          password: e.target.elements.password.value,
+        })
+      ).then(() => history.push("/dashboard"));
+    }
+  };
+
+  const handleValidateEmail = (value) => {
+    if (!value) {
+      setValidates((prevState) => ({ ...prevState, email: "error-required" }));
+      return false;
+    } else {
+      if (!regEmail.test(value)) {
+        setValidates((prevState) => ({
+          ...prevState,
+          email: "error-invalid",
+        }));
+        return false;
+      }
+    }
+    setValidates((prevState) => ({ ...prevState, email: "" }));
+    return true;
+  };
+
+  const handleValidatePassword = (value) => {
+    if (!value) {
+      setValidates((prevState) => ({
+        ...prevState,
+        password: "error-required",
+      }));
+      return false;
+    }
+
+    setValidates((prevState) => ({
+      ...prevState,
+      password: "",
+    }));
+    return true;
   };
 
   return (
@@ -33,7 +100,7 @@ const LoginPage = () => {
               Please sign-in to your account and start the adventure
             </p>
           </div>
-          <Form>
+          <Form onSubmit={handleSubmitForm}>
             <FormGroup>
               <Label className="fs-12 label-required" for="form-login-email">
                 Email
@@ -42,10 +109,17 @@ const LoginPage = () => {
                 id="form-login-email"
                 name="email"
                 placeholder="joinDoe@gmail.com"
-                type="email"
-                required
+                invalid={!isEmpty(validates.email)}
+                onChange={(e) => handleValidateEmail(e.target.value)}
               />
+              {validates.email === "error-required" && (
+                <FormFeedback>The email is required</FormFeedback>
+              )}
+              {validates.email === "error-invalid" && (
+                <FormFeedback>The email is not valid</FormFeedback>
+              )}
             </FormGroup>
+
             <FormGroup>
               <Label
                 for="form-login-email"
@@ -60,8 +134,12 @@ const LoginPage = () => {
                 id="form-login-password"
                 name="password"
                 type="password"
-                required
+                invalid={!isEmpty(validates.password)}
+                onChange={(e) => handleValidatePassword(e.target.value)}
               />
+              {validates.password === "error-required" && (
+                <FormFeedback>The email is required</FormFeedback>
+              )}
             </FormGroup>
             <FormGroup check className="mb-3">
               <Input id="form-login-remember" type="checkbox" />{" "}
@@ -72,7 +150,7 @@ const LoginPage = () => {
             <Button
               className="w-100 bgcolor-indigo-400 mb-3"
               type="submit"
-              onClick={handleSubmitForm}
+              // onClick={handleSubmitForm}
             >
               Login
             </Button>

@@ -9,10 +9,26 @@ import {
 import cloudStorage from "../../assets/cloudstorage.svg";
 import { useState } from "react";
 import { ReactComponent as Power } from "../../assets/power.svg";
+import { useDispatch } from "react-redux";
+import { logout } from "../../appSlice";
+import { useHistory } from "react-router";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  const handleLogout = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    dispatch(
+      logout({
+        accessToken,
+        refreshToken,
+      })
+    ).then(() => history.push("/login"));
+  };
   return (
     <div className="vh-100 d-flex flex-column">
       <Dropdown
@@ -35,7 +51,10 @@ const Dashboard = () => {
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem>
-            <div className="d-flex justify-content-between align-items-center">
+            <div
+              className="d-flex justify-content-between align-items-center"
+              onClick={handleLogout}
+            >
               <span>Log out</span>
               <Power />
             </div>

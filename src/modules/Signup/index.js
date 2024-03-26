@@ -4,12 +4,23 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 // import { ReactComponent as GroupImage } from "../../assets/group.svg";
 import { ReactComponent as SocialButtons } from "../../assets/social-buttons.svg";
 import GroupImage from "../../assets/group.svg";
+import { useDispatch } from "react-redux";
+import { signup } from "../../appSlice";
 
 const Signup = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    dispatch(
+      signup({
+        email: "test997@gmail.com",
+        password: "12345678",
+        firstName: "Dev",
+        lastName: "Mr",
+      })
+    );
   };
 
   return (
