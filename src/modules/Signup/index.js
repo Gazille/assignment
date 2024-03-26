@@ -136,7 +136,7 @@ const Signup = () => {
   return (
     <div className="container-fluid vh-100">
       <div className="row">
-        <div className="col-8 vh-100 d-flex justify-content-center align-items-center">
+        <div className="col-8 vh-100 d-flex justify-content-center align-items-center bg-grey">
           <div className="w-75">
             <img
               src={GroupImage}
