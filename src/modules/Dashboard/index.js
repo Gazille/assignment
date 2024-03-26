@@ -30,14 +30,14 @@ const Dashboard = () => {
     ).then(() => history.push("/login"));
   };
   return (
-    <div className="vh-100 d-flex flex-column">
+    <div className="d-flex flex-column position-relative">
       <Dropdown
-        className="w-full d-flex justify-content-end px-2"
+        className="vw-100 d-flex justify-content-end px-2 position-absolute bg-white"
         isOpen={dropdownOpen}
         toggle={toggle}
       >
         <DropdownToggle data-toggle="dropdown" tag="span">
-          <div className="p-2 bg-white">
+          <div className="p-2">
             <div className="d-flex">
               <div className="me-2">
                 <p className="m-0">John Doe</p>
@@ -62,12 +62,9 @@ const Dashboard = () => {
         </DropdownMenu>
       </Dropdown>
 
-      <div
-        className="bg-grey h-full d-flex justify-content-center align-items-center flex-column"
-        style={{ flex: "auto" }}
-      >
+      <div className="bg-grey h-full d-flex justify-content-center align-items-center flex-column pt-120">
         <p className="fs-24">Welcome to Demo App</p>
-        <div className="w-50 mt-5 position-relative">
+        <div className="mt-5 position-relative">
           <img
             src={cloudStorage}
             alt="cloundstorage"

@@ -81,6 +81,10 @@
   cursor: pointer !important;
 }
 
+.pt-120 {
+  padding-top: 120px !important;
+}
+
 .label-required::after {
   display: inline-block;
   color: red;
