@@ -8,13 +8,12 @@ import {
   Input,
   Label,
 } from "reactstrap";
-// import { ReactComponent as GroupImage } from "../../assets/group.svg";
 import { ReactComponent as SocialButtons } from "../../assets/social-buttons.svg";
 import GroupImage from "../../assets/group.svg";
 import { useDispatch } from "react-redux";
 import { signup } from "../../appSlice";
 import { useState } from "react";
-import { regEmail } from "../../constants";
+import { regEmail, regStrongpassword } from "../../constants";
 import { isEmpty } from "lodash";
 
 const Signup = () => {
@@ -75,6 +74,22 @@ const Signup = () => {
       setValidates((prevState) => ({
         ...prevState,
         password: "error-required",
+      }));
+      return false;
+    }
+
+    if (value.length < 6 || value.length > 18) {
+      setValidates((prevState) => ({
+        ...prevState,
+        password: "error-length",
+      }));
+      return false;
+    }
+
+    if (!regStrongpassword.test(value)) {
+      setValidates((prevState) => ({
+        ...prevState,
+        password: "error-week-password",
       }));
       return false;
     }
@@ -201,6 +216,17 @@ const Signup = () => {
               />
               {validates.password === "error-required" && (
                 <FormFeedback>The password is required</FormFeedback>
+              )}
+              {validates.password === "error-length" && (
+                <FormFeedback>
+                  The password must be between 6-18 characters.
+                </FormFeedback>
+              )}
+              {validates.password === "error-week-password" && (
+                <FormFeedback>
+                  The password must contain at least one digit, one special
+                  character, and one letter.
+                </FormFeedback>
               )}
             </FormGroup>
             <FormGroup check className="mb-3">
