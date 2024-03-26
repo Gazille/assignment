@@ -3,6 +3,7 @@ import LoginPage from "./modules/LoginPage";
 import Signup from "./modules/Signup";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "./modules/Dashboard";
+import { Redirect } from "react-router";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Signup />
           </Route>
           <Route path="/dashboard" component={Dashboard}></Route>
+          <Redirect to="/login" />
         </Switch>
       </div>
     </Router>

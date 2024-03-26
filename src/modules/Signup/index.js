@@ -24,20 +24,34 @@ const Signup = () => {
             />
           </div>
         </div>
-        <div className="col-4 d-flex justify-content-center vh-100 flex-column px-5 row-gap-3">
-          <p className="fs-5 fw-semibold m-0">Adventure starts here</p>
-          <p className="fs-6 mb-2">Make your app management easy and fun!</p>
+        <div className="col-4 d-flex justify-content-center vh-100 flex-column px-70">
+          <div className="header mb-4">
+            <p className="fs-18 fw-medium mb-3">Adventure starts here</p>
+            <p className="fs-16 m-0">Make your app management easy and fun!</p>
+          </div>
           <Form>
             <FormGroup>
-              <Label for="form-signup-firstname">Firstname</Label>
+              <Label
+                className="fs-12 label-required"
+                for="form-signup-firstname"
+              >
+                Firstname
+              </Label>
               <Input id="form-signup-firstname" name="firstname" />
             </FormGroup>
             <FormGroup>
-              <Label for="form-signup-lastname">Lastname</Label>
+              <Label
+                className="fs-12 label-required"
+                for="form-signup-lastname"
+              >
+                Lastname
+              </Label>
               <Input id="form-signup-lastname" name="lastname" />
             </FormGroup>
             <FormGroup>
-              <Label for="form-signup-email">Email</Label>
+              <Label className="fs-12 label-required" for="form-signup-email">
+                Email
+              </Label>
               <Input
                 id="form-signup-email"
                 name="email"
@@ -47,10 +61,7 @@ const Signup = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label
-                for="form-signup-email"
-                className="d-flex justify-content-between"
-              >
+              <Label for="form-signup-email" className="fs-12 label-required">
                 Password
               </Label>
               <Input
@@ -66,7 +77,7 @@ const Signup = () => {
                 i agree to{" "}
                 <a
                   href="#"
-                  className="link-offset-2 link-underline link-underline-opacity-0 color-indigo-400"
+                  className="cursor-pointer link-offset-2 link-underline link-underline-opacity-0 color-indigo-400"
                 >
                   privacy policy & terms
                 </a>
@@ -82,7 +93,7 @@ const Signup = () => {
             <div className="justify-content-center column-gap-2 d-flex w-100 mb-3">
               <span>Already have an account?</span>
               <a
-                className="link-offset-2 link-underline link-underline-opacity-0 color-indigo-400"
+                className="cursor-pointer link-offset-2 link-underline link-underline-opacity-0 color-indigo-400"
                 onClick={() => history.push("/login")}
               >
                 Sign in instead

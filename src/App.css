@@ -48,3 +48,42 @@
 .bg-grey {
   background-color: #f8f8f8;
 }
+
+.px-70 {
+  padding: 0 70px !important;
+}
+
+.fs-18 {
+  font-size: 18px !important;
+}
+
+.fs-16 {
+  font-size: 16px !important;
+}
+
+.fs-12 {
+  font-size: 12px !important;
+}
+
+.fs-24 {
+  font-size: 24px !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+.mb-23 {
+  margin-bottom: 23px !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.label-required::after {
+  display: inline-block;
+  color: red;
+  line-height: 1;
+  content: "*";
+}
