@@ -68,7 +68,7 @@ export const logout = createAsyncThunk(
       },
       {
         headers: {
-          Authorization: payload.accessToken,
+          Authorization: `Bearer ${payload.accessToken}`,
         },
       }
     );
