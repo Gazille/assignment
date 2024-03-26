@@ -1,0 +1,29 @@
+.line-throught-container {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  position: relative;
+}
+
+.line-throught-container:after {
+  content: "";
+  width: 100%;
+  border-bottom: solid 1px black;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 1;
+}
+
+.line-throught-text {
+  background-color: white; /* Same as the parents Background */
+  width: auto;
+  display: inline-block;
+  z-index: 3;
+  padding: 0 20px 0 20px;
+  color: black;
+  position: relative;
+  font-family: calibri;
+  font-weight: lighter;
+  margin: 0;
+}
