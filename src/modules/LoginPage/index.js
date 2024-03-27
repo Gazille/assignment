@@ -86,8 +86,8 @@ const LoginPage = () => {
           <div className="col-8">
             <img
               src={MeetingImage}
-              alt="meeting object-fit-cover"
-              className="w-100 h-100"
+              alt="meeting"
+              className="w-100 h-100 object-fit-contain"
             />
           </div>
         </div>
