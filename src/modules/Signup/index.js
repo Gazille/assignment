@@ -136,7 +136,7 @@ const Signup = () => {
   return (
     <div className="vh-100">
       <div className="row h-100 m-0">
-        <div className="col-md-8 col-12 d-flex justify-content-center align-items-center bg-grey">
+        <div className="col-lg-8 col-12 d-flex justify-content-center align-items-center bg-grey">
           <div className="col-8">
             <img
               src={GroupImage}
@@ -145,7 +145,7 @@ const Signup = () => {
             />
           </div>
         </div>
-        <div className="col-md-4 col-12 d-flex justify-content-center flex-column p-5">
+        <div className="col-lg-4 col-12 d-flex justify-content-center flex-column p-5">
           <div className="header mb-4">
             <p className="fs-18 fw-medium mb-3">Adventure starts here</p>
             <p className="fs-16 m-0">Make your app management easy and fun!</p>
