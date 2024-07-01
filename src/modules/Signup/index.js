@@ -13,7 +13,7 @@ import GroupImage from "../../assets/group.svg";
 import { useDispatch } from "react-redux";
 import { signup } from "../../appSlice";
 import { useState } from "react";
-import { regEmail, regStrongpassword } from "../../constants";
+import { regEmail } from "../../constants";
 import { isEmpty } from "lodash";
 
 const Signup = () => {
@@ -23,21 +23,21 @@ const Signup = () => {
   const [validates, setValidates] = useState(() => ({
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
   }));
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
-    const lastName = e.target.elements.lastName.value;
-    const firstName = e.target.elements.firstName.value;
+    const lastname = e.target.elements.lastname.value;
+    const firstname = e.target.elements.firstname.value;
 
     const result = await Promise.all([
       handleValidateEmail(email),
-      handleValidatefirstName(firstName),
-      handleValidateLastName(lastName),
+      handleValidatefirstname(firstname),
+      handleValidatelastname(lastname),
       handleValidatePassword(password),
     ]);
     if (result.every((value) => value)) {
@@ -45,8 +45,8 @@ const Signup = () => {
         signup({
           email,
           password,
-          firstName,
-          lastName,
+          firstname,
+          lastname,
         })
       ).then(() => history.push("/login"));
     }
@@ -86,14 +86,6 @@ const Signup = () => {
       return false;
     }
 
-    if (!regStrongpassword.test(value)) {
-      setValidates((prevState) => ({
-        ...prevState,
-        password: "error-week-password",
-      }));
-      return false;
-    }
-
     setValidates((prevState) => ({
       ...prevState,
       password: "",
@@ -101,34 +93,34 @@ const Signup = () => {
     return true;
   };
 
-  const handleValidateLastName = (value) => {
+  const handleValidatelastname = (value) => {
     if (!value) {
       setValidates((prevState) => ({
         ...prevState,
-        lastName: "error-required",
+        lastname: "error-required",
       }));
       return false;
     }
 
     setValidates((prevState) => ({
       ...prevState,
-      lastName: "",
+      lastname: "",
     }));
     return true;
   };
 
-  const handleValidatefirstName = (value) => {
+  const handleValidatefirstname = (value) => {
     if (!value) {
       setValidates((prevState) => ({
         ...prevState,
-        firstName: "error-required",
+        firstname: "error-required",
       }));
       return false;
     }
 
     setValidates((prevState) => ({
       ...prevState,
-      firstName: "",
+      firstname: "",
     }));
     return true;
   };
@@ -154,34 +146,34 @@ const Signup = () => {
             <FormGroup>
               <Label
                 className="fs-12 label-required"
-                for="form-signup-firstName"
+                for="form-signup-firstname"
               >
-                FirstName
+                Firstname
               </Label>
               <Input
-                id="form-signup-firstName"
-                name="firstName"
-                onChange={(e) => handleValidatefirstName(e.target.value)}
-                invalid={!isEmpty(validates.firstName)}
+                id="form-signup-firstname"
+                name="firstname"
+                onChange={(e) => handleValidatefirstname(e.target.value)}
+                invalid={!isEmpty(validates.firstname)}
               />
-              {validates.firstName === "error-required" && (
+              {validates.firstname === "error-required" && (
                 <FormFeedback>The first name is required.</FormFeedback>
               )}
             </FormGroup>
             <FormGroup>
               <Label
                 className="fs-12 label-required"
-                for="form-signup-lastName"
+                for="form-signup-lastname"
               >
-                LastName
+                Lastname
               </Label>
               <Input
-                id="form-signup-lastName"
-                name="lastName"
-                onChange={(e) => handleValidateLastName(e.target.value)}
-                invalid={!isEmpty(validates.lastName)}
+                id="form-signup-lastname"
+                name="lastname"
+                onChange={(e) => handleValidatelastname(e.target.value)}
+                invalid={!isEmpty(validates.lastname)}
               />
-              {validates.lastName === "error-required" && (
+              {validates.lastname === "error-required" && (
                 <FormFeedback>The last name is required.</FormFeedback>
               )}
             </FormGroup>
